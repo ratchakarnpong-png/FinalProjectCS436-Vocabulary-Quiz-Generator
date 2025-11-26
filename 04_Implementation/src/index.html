@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Quiz Generator</title>
+    <!-- ใช้ Tailwind CSS สำหรับ UI ที่สวยงามและรวดเร็ว -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl overflow-hidden p-6 md:p-8">
+        
+        <!-- Header -->
+        <header class="mb-6 text-center">
+            <h1 class="text-3xl font-bold text-blue-600 mb-2">Vocabulary Quiz Generator</h1>
+            <p class="text-gray-500">ระบบสร้างแบบทดสอบคำศัพท์อัตโนมัติ</p>
+        </header>
+
+        <!-- STATE 1: Upload Screen -->
+        <div id="upload-screen" class="text-center fade-in">
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 hover:bg-gray-50 transition">
+                <div class="mb-4 text-6xl">📂</div>
+                <h2 class="text-xl font-semibold mb-2">อัปโหลดไฟล์คำศัพท์ (.csv หรือ .txt)</h2>
+                <p class="text-sm text-gray-500 mb-4">รูปแบบ: คำศัพท์,คำแปล (หนึ่งคู่ต่อบรรทัด)</p>
+                <input type="file" id="file-input" accept=".csv, .txt" class="block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100 mb-4 mx-auto max-w-xs
+                "/>
+                <p class="text-xs text-gray-400 mt-2">หรือ</p>
+                <button onclick="loadSampleData()" class="mt-2 text-blue-500 underline text-sm hover:text-blue-700">ใช้ข้อมูลตัวอย่าง (Demo)</button>
+            </div>
+            <div id="error-message" class="mt-4 text-red-500 hidden"></div>
+        </div>
+
+        <!-- STATE 2: Quiz Screen -->
+        <div id="quiz-screen" class="hidden fade-in">
+            <div class="flex justify-between items-center mb-6 bg-blue-50 p-4 rounded-lg">
+                <div>
+                    <span class="text-sm text-gray-600">ข้อที่:</span>
+                    <span id="question-number" class="text-xl font-bold text-blue-800">1</span>
+                    <span class="text-sm text-gray-600"> / <span id="total-questions">10</span></span>
+                </div>
+                <div>
+                    <span class="text-sm text-gray-600">คะแนน:</span>
+                    <span id="current-score" class="text-xl font-bold text-green-600">0</span>
+                </div>
+            </div>
+
+            <div class="mb-8 text-center">
+                <h3 class="text-lg text-gray-500 mb-2">จงเลือกความหมายของคำว่า:</h3>
+                <h2 id="question-word" class="text-4xl font-bold text-gray-800 tracking-wide">WORD</h2>
+            </div>
+
+            <div id="choices-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Choice Buttons will be injected here -->
+            </div>
+            
+            <div id="feedback-area" class="mt-6 text-center hidden h-8">
+                <span id="feedback-text" class="font-bold text-lg"></span>
+            </div>
+        </div>
+
+        <!-- STATE 3: Result Screen -->
+        <div id="result-screen" class="hidden text-center fade-in">
+            <div class="mb-6">
+                <div class="text-6xl mb-4">🏆</div>
+                <h2 class="text-2xl font-bold text-gray-800">การทดสอบเสร็จสิ้น!</h2>
+                <p class="text-gray-600 mt-2">คะแนนรวมของคุณคือ</p>
+            </div>
+            
+            <div class="text-6xl font-bold text-blue-600 mb-8">
+                <span id="final-score">0</span> / <span id="final-total">10</span>
+            </div>
+
+            <div class="flex justify-center gap-4">
+                <button onclick="restartQuiz()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold shadow-md transition">
+                    ทำแบบทดสอบอีกครั้ง
+                </button>
+                <button onclick="location.reload()" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 font-semibold transition">
+                    โหลดไฟล์ใหม่
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
