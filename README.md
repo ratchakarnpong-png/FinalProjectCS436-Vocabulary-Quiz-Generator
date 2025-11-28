@@ -30,5 +30,3 @@
 2. เข้าไปที่ 04\_Implementation  
 3. เปิดไฟล์ index.html ผ่าน Google Chrome หรือ Edge  
 4. พร้อมใช้งานทันที (ไม่ต้องลงโปรแกรมเพิ่ม)
-
-\<p align="center"\>Final Project for CS436 \- Software Development Life Cycle\</p\>
